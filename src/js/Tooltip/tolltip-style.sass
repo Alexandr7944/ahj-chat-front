@@ -1,0 +1,39 @@
+.tooltip
+  position: absolute
+  border-radius: 5px
+  border: 1px solid #dfd3d3
+  max-width: 300px
+  opacity: 0
+  transform: translateY(-150px)
+  transition: .3s
+  z-index: 100
+
+  &__title
+    padding: 5px
+    background-color: #dfd3d3
+
+  &__content
+    padding: 10px 5px
+    background-color: #fff
+
+.arrow
+  position: absolute
+  width: 2em
+  height: 1em
+  bottom: calc((1em + 1px) * -1)
+  left: 50%
+  transform: translatex(-50%)
+
+  &::after,
+  &::before
+    content: ''
+    position: absolute
+    border: 1em solid transparent
+
+  &::before
+    bottom: -1em
+    border-top: 1em solid #dfd3d3
+
+  &::after
+    bottom: calc(-1em + 1px)
+    border-top: 1em solid #fff

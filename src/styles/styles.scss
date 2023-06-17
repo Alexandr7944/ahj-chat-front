@@ -1,0 +1,135 @@
+$colorBlack: #524e4e;
+
+@mixin border {
+  padding: 15px;
+  border-radius: 15px;
+  border: 3px solid $colorBlack;
+  background-color: #fff;
+}
+@mixin btn {
+  @include border;
+  padding: 5px 10px;
+  border-width: 2px;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+
+  background: url('../image/rm301-eye-04.jpg') center center/cover no-repeat;
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: $colorBlack;
+}
+
+li {
+  list-style: none;
+}
+
+.modal {
+  margin: 100px auto;
+  width: 100%;
+  max-width: 400px;
+  @include border;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  &__input,
+  &__submit {
+    @include btn;
+  }
+}
+
+.chat {
+  margin: 100px auto;
+  width: 100%;
+  max-width: 600px;
+  @include border;
+
+  display: flex;
+  justify-content: center;
+
+  &__users {
+    @include border;
+    width: 25%;
+    margin-top: 15px;
+    border-radius: 15px 0 0 15px;
+    margin-right: -2px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  &__user_me {
+    color: red;
+  }
+
+  &__body {
+    width: 70%;
+    height: 500px;
+    @include border;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+  }
+
+  &__container {
+    margin-bottom: 15px;
+    position: relative;
+    height: 450px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+  }
+
+
+
+  &__item,
+  &__item_right {
+    border: 1px solid #000;
+    padding: 15px;
+    border-radius: 15px;
+    width: 60%;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
+
+  &__item_right {
+    margin-left: auto;
+  }
+
+  &__input {
+    @include btn;
+    width: 100%;
+  }
+}
