@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+import Transport from "./Transport";
+
 class Chat {
   constructor (name) {
     this.name = name;
@@ -21,40 +23,14 @@ class Chat {
   }
 
   async ws() {
-    const ws = new WebSocket('ws://localhost:7070/ws');
-    const chat = document.querySelector(".chat__container");
-    const chatUsers = document.querySelector(".chat__users");
+    const ws = new WebSocket('wss://ahj-chat-back.onrender.com/ws');
+
+    ws.onopen = event => console.log(event);
+    ws.onerror = event => console.log(event);
 
     ws.addEventListener('message', (e) => {
-      const data = JSON.parse(e.data);
-      const users = [];
-      
-      const { chat: messages } = data;
-      
-      messages.forEach(message => {
-        const item = document.createElement('div');
-
-        item.className = message.name === this.name ? "chat__item_right" : "chat__item";
-        item.innerHTML = `
-          <span class="chat__name">${message.name}</span>
-          <span class="chat__date">${new Date(message.date).toLocaleString()}</span>
-          <div class="chat__item-text">${message.body}</div>
-        `;
-        chat.append(item);
-
-        !users.includes(message.name) && users.push(message.name)
-      });
-
-      users.forEach(user => {
-        if (chatUsers.textContent.includes(user)) return;
-
-        const userItem = document.createElement('li');
-        userItem.className = user === this.name ? "chat__user_me" : "chat__user";
-        userItem.textContent = user;
-        chatUsers.append(userItem);
-      })
-
-      chat.scrollTo(0, chat.scrollHeight)
+      const { chat: messages } = JSON.parse(e.data);
+      Transport.handlerMessages(messages, this.name);
     });
 
     const input = document.querySelector('.chat__input');

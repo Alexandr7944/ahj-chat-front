@@ -12,7 +12,7 @@ class Auth {
     if (!value) return;
 
     try {
-      const response = await fetch('http://localhost:7070/auth', {
+      const response = await fetch('https://ahj-chat-back.onrender.com/auth', {
         method: 'POST',
         body: JSON.stringify({ value }),
         headers: { 'Content-Type': 'application/json' }
@@ -26,7 +26,9 @@ class Auth {
       new Chat(value).getChat();
       
     } catch (err) {
-      new Tooltip(modalInput).addTooltip();
+      const tooltip = new Tooltip(modalInput)
+      tooltip.addTooltip();
+      setTimeout(() => tooltip.removeTooltip(), 3000);
     }
   }
 
